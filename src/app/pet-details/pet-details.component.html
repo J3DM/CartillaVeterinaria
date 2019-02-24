@@ -1,0 +1,36 @@
+<form>
+        <div class="form-group">
+          <label for="petType">Tipo</label>
+          <input type="text" class="form-control" id="petType" [(ngModel)]="pet.typePet" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label for="petRace">Raza</label>
+          <input type="text" class="form-control" id="petRace" [(ngModel)]="pet.race" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label for="petName">Nombre</label>
+          <input type="text" class="form-control" id="petName" [(ngModel)]="pet.name" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label for="petDob">Fecha Nacimiento</label>
+          <input type="date" class="form-control" id="petDob" [(ngModel)]="pet.dob" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label for="petWiught">Peso</label>
+          <input type="number" class="form-control" id="petWight" [(ngModel)]="pet.weight" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group">
+          <label for="petNext">Proxima Cita</label>
+          <input type="date" class="form-control" id="petNext" [(ngModel)]="pet.nextAppoint" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-group mr-2" role="group" >
+            <a href="/pets" class="btn btn-primary" (click)="onSubmit()">Actualizar</a>
+          </div>
+          <div class="btn-group mr-2" role="group" >
+                  <a href="/" class="btn btn-danger" (click)="deletePet(pet._id)">Eliminar</a>
+          </div>
+          
+        </div>
+      
+      </form>
