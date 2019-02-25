@@ -7,9 +7,9 @@ import { Pet } from '../models/Pet'
 })
 export class PetService {
   //Definimos el puerto por que escucha nuestra API
-  puertoMongoose:string='7777'
+  puertoMongoose:string='27017'
   //definimos la url donde esta nuestra API
-  urlMongoose:string='http://localhost:'+this.puertoMongoose
+  urlMongoose:string='https://cartilla-veterinaria.herokuapp.com'
   //Como esta clase va a enviary recibir informacion de la api necesita HttpClient
   constructor(private httpClient:HttpClient) { }
   //A continuacion definimos los metodos que queremos que nuestro servicio realice
