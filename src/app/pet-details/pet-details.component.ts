@@ -38,7 +38,7 @@ export class PetDetailsComponent implements OnInit {
       result=> {
         console.log('Pet updated')
         this.pet=result['data']
-        //this.router.navigate(['/pet',this.pet._id])
+        this.router.navigate(['/pet',this.pet._id])
       },
       error=>{
         console.error('Error updatinf the pet -> '+error)
@@ -51,6 +51,7 @@ export class PetDetailsComponent implements OnInit {
     this.petService.deletePet(id).subscribe(
       result=>{
         console.log("Pet deleted "+result)
+        this.router.navigate(['/'])
       },
       error=>{
         console.error('Error deleting a Pet '+error)
