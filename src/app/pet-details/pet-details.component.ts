@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Pet } from '../models/Pet'
 import { Router, ActivatedRoute } from '@angular/router'
 import { PetService } from '../services/pet.service'
-import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'app-pet-details',
@@ -13,6 +12,9 @@ export class PetDetailsComponent implements OnInit {
 
   public pet: Pet
 
+  dateDOB
+  dateVisit
+
   constructor(private petService: PetService,
     private activateRoute: ActivatedRoute,
     private router: Router) { }
@@ -22,8 +24,16 @@ export class PetDetailsComponent implements OnInit {
     let id = this.activateRoute.snapshot.params['_id']
     this.petService.getPet(id).subscribe(
       result => {
-        console.log(result)
         this.pet = result['data']
+        
+        if (this.pet.dob!=undefined) {
+          
+          this.dateDOB=this.pet.dob.valueOf().toString().split("T",1)[0]  
+        }
+        if (this.pet.nextAppoint!=undefined) {
+          
+          this.dateVisit=this.pet.nextAppoint.valueOf().toString().split("T",1)[0]  
+        }
       },
       error => {
         console.error('Error looking for a pet -> ' + error)
@@ -34,6 +44,8 @@ export class PetDetailsComponent implements OnInit {
 
   onSubmit(){
     console.log(this.pet)
+    this.pet.dob=this.dateDOB
+    this.pet.nextAppoint=this.dateVisit
     this.petService.updatePet(this.pet._id,this.pet).subscribe(
       result=> {
         console.log('Pet updated')

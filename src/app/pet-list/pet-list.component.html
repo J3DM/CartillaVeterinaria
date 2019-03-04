@@ -13,7 +13,7 @@
     <tr  *ngFor="let pet of pets">
       <th scope="row">{{pet.name | uppercase}}</th>
       <td>{{pet.race}}</td>
-      <td>{{pet.nextAppoint}}</td>
+      <td>{{pet.nextAppoint | date: 'dd-MM-yyyy'}}</td>
       <td><a href="/pet/{{pet._id}}">Ver</a></td>
     </tr>
   </tbody>
