@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Pet } from '../models/Pet';
 import { PetService } from '../services/pet.service';
 import { Router } from '@angular/router';
+import { History } from '../models/History';
+import { Record } from '../models/Record';
 
 @Component({
   selector: 'app-pet-add',
@@ -15,7 +17,7 @@ export class PetAddComponent implements OnInit {
   constructor(private petService:PetService,private router:Router) { }
 
   ngOnInit() {
-    this.pet=new Pet('','','','',new Date,0,new Date)
+    this.pet=new Pet('','','','',new Date,0,new Date, new History(new Array<Record>()))
   }
 
   onSubmit(){

@@ -1,3 +1,4 @@
+import {History} from './History'
 export class Pet {
     constructor(
         public _id:string,
@@ -7,6 +8,8 @@ export class Pet {
         public dob: Date,
         public weight: number,
         public nextAppoint: Date,
+        public history: History
+    ){
 
-    ){}
+    }
 }
