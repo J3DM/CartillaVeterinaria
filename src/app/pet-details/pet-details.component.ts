@@ -114,4 +114,16 @@ export class PetDetailsComponent implements OnInit {
     )
   }
 
+  updateRecord(id:string,record:RecordId){
+    let idPet = this.activateRoute.snapshot.params['_id']
+    this.recordService.updateRecord(id,record).subscribe(
+      result=>{
+        this.router.navigate(['/pet',idPet])
+      },
+      error=>{
+        console.error('Error updating record '+record._id+' -> '+error)
+      }
+    )
+  }
+
 }

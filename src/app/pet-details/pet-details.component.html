@@ -78,11 +78,15 @@
 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
     <ngb-panel *ngFor="let record of pet.history.records;" title="Visita {{record.recordId.date}}">
       <ng-template ngbPanelContent>
-        <p>Weight: {{record.recordId.weight}}</p>
-        <p>Decription: {{record.recordId.description}}</p>
+        <form>
+            <label for="petWeight">Peso</label>
+            <input type="number" class="form-control" id="petWeight" name='weight'[(ngModel)]="record.recordId.weight">
+            <label for="petDescription">Description</label>
+            <input type="text" class="form-control" id="petDescription" name='description' [(ngModel)]="record.recordId.description">
+        </form>
         <div class="row">
           <div class="col-6">
-              <button type="button" class="btn btn-warning" disabled='true'>Editar</button>
+              <button type="button" class="btn btn-warning" (click)="updateRecord(record.recordId._id,record.recordId)">Editar</button>
           </div>
           <div class="col-6">
               <button type="button" class="btn btn-danger" (click)="deleteRecord(record.recordId._id)">Eliminar</button>
