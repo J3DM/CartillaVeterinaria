@@ -11,15 +11,16 @@ export class RecordService {
   constructor(private httpClient: HttpClient) { }
   saveRecord(idPet: string, record: RecordId) {
     const parametros = JSON.stringify(record);
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization':'Bearer '+localStorage.getItem('token')})
     return this.httpClient.post(this.urlMongoose + '/record/' + idPet, parametros, { headers: headers });
   }
   updateRecord(id: string, record: RecordId) {
     const parametros = JSON.stringify(record);
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' ,'Authorization':'Bearer '+localStorage.getItem('token')})
     return this.httpClient.put(this.urlMongoose + '/record/' + id, parametros, { headers: headers });
   }
   deleteRecord(idPet: string,idRevision:string) {
-    return this.httpClient.delete(this.urlMongoose + '/record/' + idPet+"/"+idRevision);
+    const headers= new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('token')})
+    return this.httpClient.delete(this.urlMongoose + '/record/' + idPet+"/"+idRevision,{headers:headers});
   }
 }

@@ -10,6 +10,8 @@ import { PetListComponent } from './pet-list/pet-list.component';
 import { PetInicioComponent } from './pet-inicio/pet-inicio.component';
 import { PetAddComponent } from './pet-add/pet-add.component';
 import { PetDetailsComponent } from './pet-details/pet-details.component';
+import { ErrorHandlerComponent } from './error-handler/error-handler.component';
+import { UserLoginComponent } from './user-login/user-login.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { PetDetailsComponent } from './pet-details/pet-details.component';
     PetListComponent,
     PetInicioComponent,
     PetAddComponent,
-    PetDetailsComponent
+    PetDetailsComponent,
+    ErrorHandlerComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,

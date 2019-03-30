@@ -6,15 +6,15 @@
   </div>
   <div class="form-group">
     <label for="petRace">Raza</label>
-    <input type="text" class="form-control" id="petRace" [(ngModel)]="pet.race" [ngModelOptions]="{standalone: true}">
+    <input type="text" class="form-control" id="petRace" name="petRace"[(ngModel)]="pet.race" >
   </div>
   <div class="form-group">
     <label for="petName">Nombre</label>
-    <input type="text" class="form-control" id="petName" [(ngModel)]="pet.name" [ngModelOptions]="{standalone: true}">
+    <input type="text" class="form-control" id="petName" name="petName" [(ngModel)]="pet.name">
   </div>
   <div class="form-group">
     <label for="petDob">Fecha Nacimiento</label>
-    <input type="date" class="form-control" id="petDob" [(ngModel)]="dateDOB" [ngModelOptions]="{standalone: true}">
+    <input type="date" class="form-control" id="petDob" name="petDOB" [(ngModel)]="pet.dob">
   </div>
   <div class="form-group">
     <label for="petWiught">Peso</label>
@@ -23,7 +23,7 @@
   </div>
   <div class="form-group">
     <label for="petNext">Proxima Cita</label>
-    <input type="date" class="form-control" id="petNext" [(ngModel)]="dateVisit" [ngModelOptions]="{standalone: true}">
+    <input type="date" class="form-control" id="petNext" name="dateVisit" [(ngModel)]="pet.nextAppoint">
   </div>
 
   <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -38,7 +38,15 @@
 </form>
 
 <div class='row'>
-  <div class='col-6'><h3>Revisiones: {{pet.history.records.length}}</h3></div>
+  <ng-container *ngIf="numeroRevisiones>0; else elseTemplate">
+      <div class='col-6'><h3>Revisiones: {{numeroRevisiones}}</h3></div>  
+  </ng-container>
+  <ng-template #elseTemplate>
+
+      <div class='col-6'><h3>Revisiones: 0</h3></div>
+  </ng-template>
+  
+  
   <div class='col-6'>
       <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add new Revision</button>
   </div>
@@ -73,25 +81,30 @@
     </div>
   </ng-template>
 
-
+<ng-container *ngIf="numeroRevisiones>0">
   <!--ACCORDION FOR CHECKING REVISIONS-->
 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-    <ngb-panel *ngFor="let record of pet.history.records;" title="Visita {{record.recordId.date}}">
-      <ng-template ngbPanelContent>
-        <form>
-            <label for="petWeight">Peso</label>
-            <input type="number" class="form-control" id="petWeight" name='weight'[(ngModel)]="record.recordId.weight">
-            <label for="petDescription">Description</label>
-            <input type="text" class="form-control" id="petDescription" name='description' [(ngModel)]="record.recordId.description">
-        </form>
-        <div class="row">
-          <div class="col-6">
-              <button type="button" class="btn btn-warning" (click)="updateRecord(record.recordId._id,record.recordId)">Editar</button>
-          </div>
-          <div class="col-6">
-              <button type="button" class="btn btn-danger" (click)="deleteRecord(record.recordId._id)">Eliminar</button>
-          </div>
+  <ngb-panel *ngFor="let record of pet.history.records;" title="Visita {{record.recordId.date}}">
+    <ng-template ngbPanelContent>
+      <form>
+          <label for="petWeight">Peso</label>
+          <input type="number" class="form-control" id="petWeight" name='weight'[(ngModel)]="record.recordId.weight">
+          <label for="petDescription">Description</label>
+          <input type="text" class="form-control" id="petDescription" name='description' [(ngModel)]="record.recordId.description">
+      </form>
+      <div class="row">
+        <div class="col-6">
+            <button type="button" class="btn btn-warning" (click)="updateRecord(record.recordId._id,record.recordId)">Editar</button>
         </div>
-      </ng-template>
-    </ngb-panel>   
+        <div class="col-6">records
+            <button type="button" class="btn btn-danger" (click)="deleteRecord(record.recordId._id)">Eliminar</button>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-panel>   
 </ngb-accordion>
+
+</ng-container>
+
+
+  

@@ -21,6 +21,7 @@ export class PetDetailsComponent implements OnInit {
   
   dateDOB
   dateVisit
+  numeroRevisiones=0
 
   constructor(private petService: PetService,
     private recordService:RecordService,
@@ -36,7 +37,8 @@ export class PetDetailsComponent implements OnInit {
     let id = this.activateRoute.snapshot.params['_id']
     this.petService.getPet(id).subscribe(
       result => {
-        this.pet = result['data']
+        console.log(result)
+        this.pet = result['data'][0]
         
         if (this.pet.dob!=undefined) {
           
@@ -45,6 +47,9 @@ export class PetDetailsComponent implements OnInit {
         if (this.pet.nextAppoint!=undefined) {
           
           this.dateVisit=this.pet.nextAppoint.valueOf().toString().split("T",1)[0]  
+        }
+        if(this.pet.history){
+          this.numeroRevisiones=this.pet.history.records.length
         }
       },
       error => {
